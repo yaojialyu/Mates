@@ -1,9 +1,24 @@
-import sae
+import tornado.web
+from tornado.httpclient import AsyncHTTPClient
 
-def app(environ, start_response):
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/html; charset=utf-8')]
-    start_response(status, response_headers)
-    return ['<strong>Welcome to SAE!</strong>']
+class MainHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        http = tornado.httpclient.AsyncHTTPClient()
+        http.fetch("http://wiki.westeros.org", callback=self._callback)
+        self.write("Hello to the Tornado world! ")
+        self.flush()
 
-application = sae.create_wsgi_app(app)
+    def _callback(self, response):
+        self.write(response.body)
+        self.finish()
+
+settings = {
+    "debug": True,
+}
+
+# application should be an instance of `tornado.web.Application`,
+# and don't wrap it with `sae.create_wsgi_app`
+application = tornado.web.Application([
+    (r"/", MainHandler),
+], **settings)

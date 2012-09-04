@@ -2,3 +2,4 @@
 name: project2
 version: 2
 ...
+worker: tornado
