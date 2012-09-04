@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/project2/!svn/ver/252/1/Android/src/hk/edu/uic/mates/controller
+END
+AsmackUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/project2/!svn/ver/252/1/Android/src/hk/edu/uic/mates/controller/AsmackUtil.java
+END
+FileUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/project2/!svn/ver/241/1/Android/src/hk/edu/uic/mates/controller/FileUtil.java
+END
+HttpHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/project2/!svn/ver/243/1/Android/src/hk/edu/uic/mates/controller/HttpHelper.java
+END
+VersionManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/project2/!svn/ver/58/1/Android/src/hk/edu/uic/mates/controller/VersionManager.java
+END
+HttpTransporter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/project2/!svn/ver/250/1/Android/src/hk/edu/uic/mates/controller/HttpTransporter.java
+END
+WeiboUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/project2/!svn/ver/240/1/Android/src/hk/edu/uic/mates/controller/WeiboUtil.java
+END
+Config.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/project2/!svn/ver/117/1/Android/src/hk/edu/uic/mates/controller/Config.java
+END
+JSONParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/project2/!svn/ver/102/1/Android/src/hk/edu/uic/mates/controller/JSONParser.java
+END
+LocationUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/project2/!svn/ver/72/1/Android/src/hk/edu/uic/mates/controller/LocationUtil.java
+END

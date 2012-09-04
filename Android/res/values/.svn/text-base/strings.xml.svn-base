@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mates</string>
+	
+	
+    <!-- Button Text -->
+    <string name="login">Login</string>
+    <string name="follow">Follow</string>
+    <string name="change_room_topic">Change Topic</string>
+    <string name="send">Send</string>
+    <string name="tweet">Tweet</string>
+    <string name="view_all_users">View All Users</string>
+    <string name="search">Search</string>
+    <!-- EditText Text -->
+    <string name="keyword">Search Place</string>
+    <string name="user_input_hint">input your content</string>
+    <!-- TextView Text -->
+    <string name="weibo_name">Weibo Name:</string>
+    <string name="room_name">Room Name</string>
+    <string name="room_subject">Room Name</string>
+    <string name="loading">Loading...</string>
+    
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+<!-- 设置页面 -->
+    <string name="label_account_info">Account Information</string>
+    <string name="name">Name:</string>
+    <string name="gender">Gender:</string>
+    <string name="grade">Grade:</string>
+    <string name="major">Major:</string>
+    <string name="phone">Phone:</string>
+    <string name="qq">QQ:</string>
+    <string name="logout">Logout</string>
+    <string name="input">Click to input</string>
+    <string name="label_system">System</string>
+    <string name="label_notification">Notification</string>
+    <string name="label_upload_gps">Notification</string>
+    
+<!-- 首页 -->
+    <string-array name="titles">
+        <item >Nearby</item>
+        <item >Search</item>
+        <item >History</item>
+    </string-array>
+    <string name="OpenfireNotConnected">Openfire not connected</string>
+     <string name="noHistory">No History yet</string>
+     <string name="connectOpenfireFail"> Connect to Server Failed</string>
+      <string name="connectOpenfireSuccessfully">Connect to Server Successfully</string>
+
+     <!-- 聊天页面 -->
+      <string name="sendFailed">Send Failed</string>
+      <string name="changeSubject">Change Room Subject</string>
+      <string name="changeSubjectTo">Change room subject to</string>
+      <string name="loadFinish">Load room finish</string>
+      
+      <string name="followSuccessfully">Follow successfully</string>
+      <string name="alreadyFollow">Already Follow</string>
+
+<string name="inforNotFinish"> The user is not yet perfect personal information</string>
+
+     <string name="setting">Setting</string>
+       <string name="confirm">Confirm</string>
+       <string name="confirmMessage">Really want to log off?</string>
+       
+      
+     
+    <!-- 登录页 -->
+     <string name="noNetwork">No available network</string>
+     <string name="noNetworkMessage">Please open GPRS or WIFI network connections</string>
+     
+     
+     
+    
+</resources>
