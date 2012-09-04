@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/hk.edu.uic.mates"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+        <com.markupartist.android.widget.ActionBar
+        android:id="@+id/ab_home"
+        style="@style/ActionBar"
+        />
+
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/indicator"
+        android:padding="7dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#F1F1F1"
+        app:footerColor="#329900"
+        app:titlePadding="20dp"
+        app:textSize="17dp"
+        app:footerLineHeight="3dp"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:textColor="#a0a0a0"
+        app:selectedColor="#2b2b2b"
+        app:selectedBold="false"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>

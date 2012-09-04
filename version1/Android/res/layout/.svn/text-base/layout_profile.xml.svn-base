@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5FFF1"
+    android:orientation="vertical" >
+
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/ab_profile"
+        style="@style/ActionBar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/profile_bg_2"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/ic_profile_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:padding="0.5dp"
+            android:background="#ffffff"
+            android:src="@drawable/cofthew7" />
+
+        <TextView
+            android:id="@+id/txt_profile_weiboname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/ic_profile_avatar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/loading"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_profile_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txt_profile_weiboname"
+            android:background="@drawable/follow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="#f5fff1"
+     	 >
+
+        <TextView
+            android:id="@+id/txt_basicinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/loading"
+            android:textColor="#767C77" />
+
+        <TextView
+            android:id="@+id/txt_contact"
+            android:layout_below="@id/txt_basicinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/loading"
+            android:textColor="#767C77" />
+    </RelativeLayout>
+
+</LinearLayout>
