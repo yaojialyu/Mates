@@ -4,12 +4,12 @@ Mates
 an android app which offer online chatting function.
 
 ##Version1 Authors
-Yaojia Lv
-Zixiang Li
-Renxia Wang
-Yujie Wu
+Yaojia Lv  
+Zixiang Li  
+Renxia Wang  
+Yujie Wu  
 
 ##Version2 Authors
-Yujie Wu
-Yaojia Lv
+Yujie Wu  
+Yaojia Lv  
 
