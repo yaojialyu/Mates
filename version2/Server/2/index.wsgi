@@ -22,17 +22,10 @@ import sae
 
 import logging
 import tornado.escape
-import tornado.ioloop
-import tornado.options
 import tornado.web
 import tornado.websocket
 import os.path
 import uuid
-
-from tornado.options import define, options
-
-define("port", default=8888, help="run on the given port", type=int)
-
 
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
@@ -95,17 +88,6 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
 
         ChatSocketHandler.update_cache(chat)
         ChatSocketHandler.send_updates(chat)
-
-
-def main():
-    tornado.options.parse_command_line()
-    app = Application()
-    app.listen(options.port)
-    tornado.ioloop.IOLoop.instance().start()
-
-
-if __name__ == "__main__":
-    main()
 
 # application should be an instance of `tornado.web.Application`,
 # and don't wrap it with `sae.create_wsgi_app`
