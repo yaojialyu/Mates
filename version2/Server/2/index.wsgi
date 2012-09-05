@@ -47,7 +47,7 @@ class Application(tornado.wsgi.WSGIApplication):
             xsrf_cookies=True,
             autoescape=None,
         )
-        tornado.web.Application.__init__(self, handlers, **settings)
+        tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 
 
 class MainHandler(tornado.web.RequestHandler):
