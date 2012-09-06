@@ -16,35 +16,19 @@ $(document).ready(function() {
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
 
-    $("#messageform").live("submit", function() {
-        newMessage($(this));
+    $("#submit").click(function() {
+        newMessage($("#message").val());
         return false;
     });
-    $("#messageform").live("keypress", function(e) {
-        if (e.keyCode == 13) {
-            newMessage($(this));
-            return false;
-        }
-    });
-    $("#message").select();
+
     updater.start();
 });
 
-function newMessage(form) {
-    var message = form.formToDict();
-    updater.socket.send(JSON.stringify(message));
-    form.find("input[type=text]").val("").select();
+function newMessage(message) {
+    updater.socket.send(message);
+    console.log('send message: '+ message);
+    return false;
 }
-
-jQuery.fn.formToDict = function() {
-    var fields = this.serializeArray();
-    var json = {}
-    for (var i = 0; i < fields.length; i++) {
-        json[fields[i].name] = fields[i].value;
-    }
-    if (json.next) delete json.next;
-    return json;
-};
 
 var updater = {
     socket: null,
@@ -56,17 +40,10 @@ var updater = {
         } else {
             updater.socket = new MozWebSocket(url);
         }
-	updater.socket.onmessage = function(event) {
-	    updater.showMessage(JSON.parse(event.data));
-	}
-    },
 
-    showMessage: function(message) {
-        var existing = $("#m" + message.id);
-        if (existing.length > 0) return;
-        var node = $(message.html);
-        node.hide();
-        $("#inbox").append(node);
-        node.slideDown();
+    	updater.socket.onmessage = function(event) {
+            console.log('receive message: '+event.data)
+    	}
     }
+
 };

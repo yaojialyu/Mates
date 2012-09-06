@@ -48,12 +48,10 @@ class Application(tornado.web.Application):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html", messages=ChatSocketHandler.cache)
+        self.render("index.html")
 
 class ChatSocketHandler(tornado.websocket.WebSocketHandler):
     waiters = set()
-    cache = []
-    cache_size = 200
 
     def allow_draft76(self):
         # for iOS 5.0 Safari
@@ -65,11 +63,6 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
     def on_close(self):
         ChatSocketHandler.waiters.remove(self)
 
-    @classmethod
-    def update_cache(cls, chat):
-        cls.cache.append(chat)
-        if len(cls.cache) > cls.cache_size:
-            cls.cache = cls.cache[-cls.cache_size:]
 
     @classmethod
     def send_updates(cls, chat):
@@ -82,15 +75,7 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         logging.info("got message %r", message)
-        parsed = tornado.escape.json_decode(message)
-        chat = {
-            "id": str(uuid.uuid4()),
-            "body": parsed["body"],
-            }
-        chat["html"] = self.render_string("message.html", message=chat)
-
-        ChatSocketHandler.update_cache(chat)
-        ChatSocketHandler.send_updates(chat)
+        ChatSocketHandler.send_updates(message)
 
 
 def main():

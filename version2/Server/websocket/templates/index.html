@@ -7,18 +7,13 @@
   </head>
   <body>
     <div id="body">
-      <div id="inbox">
-        {% for message in messages %}
-          {% include "message.html" %}
-        {% end %}
-      </div>
       <div id="input">
-        <form action="/a/message/new" method="post" id="messageform">
+        <form id="messageform">
           <table>
             <tr>
               <td><input name="body" id="message" style="width:500px"/></td>
               <td style="padding-left:5px">
-                <input type="submit" value="{{ _("Post") }}"/>
+                <input type="button" id="submit" value="{{ _("Post") }}"/>
                 <input type="hidden" name="next" value="{{ request.path }}"/>
               </td>
             </tr>
