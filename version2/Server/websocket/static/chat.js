@@ -21,6 +21,13 @@ $(document).ready(function() {
         return false;
     });
 
+    $("#messageform").live("keypress", function(e) {
+        if (e.keyCode == 13) {
+            newMessage($("#message").val());
+        }
+        return false;
+    });
+
     updater.start();
 });
 
