@@ -33,6 +33,7 @@ $(document).ready(function() {
 
 function newMessage(message) {
     updater.socket.send(message);
+    $("#message").val("").select();
     console.log('send message: '+ message);
     return false;
 }
