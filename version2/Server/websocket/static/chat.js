@@ -24,6 +24,7 @@ $(document).ready(function() {
     $("#messageform").live("keypress", function(e) {
         if (e.keyCode == 13) {
             newMessage($("#message").val());
+            return false;
         }
     });
 
