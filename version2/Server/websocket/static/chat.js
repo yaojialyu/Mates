@@ -25,6 +25,7 @@ $(document).ready(function() {
         if (e.keyCode == 13) {
             newMessage($("#message").val());
             return false;
+
         }
     });
 
