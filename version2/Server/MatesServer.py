@@ -12,11 +12,10 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 import os.path
+import settings
+from tornado.options import options
 
-from tornado.options import define, options
-
-#usage: python MatesServer.py --port=80
-define("port", default=8000, help="run on the given port", type=int)
+from models import db, User
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -49,6 +48,7 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
         logging.info("%s has connected to room:%s" %(userID, roomID))
         self.userID = userID
         self.roomID = roomID
+        #add current user to its corresponding actitivy (chartroom) 
         waiterSet = ChatSocketHandler.getWaiterSet(roomID)
         waiterSet.add(self)
 
