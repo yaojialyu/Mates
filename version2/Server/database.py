@@ -131,7 +131,7 @@ class Model(object):
 
     @declared_attr
     def __table_args__(cls):
-        return {'mysql_engine': 'InnoDB'}
+        return {'mysql_engine': 'InnoDB', 'mysql_charset':'utf8'}
 
     def __init__(self, **kwargs):
         for k, v in kwargs.iteritems():
@@ -185,5 +185,5 @@ class SQLAlchemy(object):
 '''
 连接数据库
 '''
-db = SQLAlchemy("mysql://%s:%s@%s:%s/%s" % (options.dbuser, options.dbpass,
-    options.dbhost, options.dbport, options.dbname), pool_recycle=3600)
+db = SQLAlchemy("mysql://%s:%s@%s:%s/%s?charset=utf8" % (options.dbuser, options.dbpass,
+    options.dbhost, options.dbport, options.dbname), pool_recycle=3600, convert_unicode=True)

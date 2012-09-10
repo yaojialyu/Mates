@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import Column, ForeignKey, String, Integer, Float, Text, DateTime, Date, Time
+from sqlalchemy import Column, ForeignKey, String, Integer, Float, Text, DateTime, Date, Time, func
 from database import db
 
 class User(db.Model):
@@ -12,7 +12,7 @@ class User(db.Model):
     profile_image_url = Column(String(100))    #用户头像地址（小头像)
     avatar_large = Column(String(100))    #用户头像地址（大头像)
     college_id = Column(Integer, ForeignKey("college.id", onupdate="CASCADE"))
-    join_time = Column(DateTime, nullable=False)   #首次登录时间
+    join_time = Column(DateTime, default=func.now(), nullable=False)   #首次登录时间
 
 class Activity(db.Model):
     title = Column(String(20), nullable=False)    #活动名
@@ -27,7 +27,7 @@ class Activity(db.Model):
     lat = Column(Float)    #纬度
     lon = Column(Float)    #经度
     creator_id = Column(Integer, ForeignKey("user.id", onupdate="CASCADE"))  #创建人id
-    create_time = Column(DateTime, nullable=False)    #活动创建时间
+    create_time = Column(DateTime, default=func.now(), nullable=False)    #活动创建时间
     
 
 class Category(db.Model):
@@ -36,7 +36,7 @@ class Category(db.Model):
 class Favourite(db.Model):
     user_id = Column(Integer, ForeignKey("user.id", onupdate="CASCADE"))     #用户id
     activity_id = Column(Integer, ForeignKey("activity.id", onupdate="CASCADE"))    #活动id
-    favourited_time = Column(DateTime, nullable=False)   #加星时间
+    favourited_time = Column(DateTime, default=func.now(), nullable=False)   #加星时间
 
 class Time(db.Model):
     activity_id = Column(Integer, ForeignKey("activity.id", onupdate="CASCADE"))    #活动id

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -17,11 +18,14 @@ from tornado.options import options
 from database import db
 from models import User
 
+
+
 class Application(tornado.web.Application):
     def __init__(self):
+        self.chat = Chat()
         handlers = [
-            (r'/(?P<userID>\d+)/(?P<roomID>\d+)/', MainHandler),
-            (r'/chat/(?P<userID>\d+)/(?P<roomID>\d+)/', ChatSocketHandler),
+            (r'/(?P<userID>\d+)/(?P<activityId>\d+)/', MainHandler),
+            (r'/chat/(?P<userID>\d+)/(?P<activityId>\d+)/', ChatSocketHandler),
         ]
         settings = dict(
             #定义template 和 static 文件的路径
@@ -32,58 +36,68 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
 
 class MainHandler(tornado.web.RequestHandler):
-    def get(self, userID, roomID):
-        self.render("index.html", userID=userID, roomID=roomID)
+    def get(self, userID, activityId):
+        self.render("index.html", userID=userID, activityId=activityId)
 
 class ChatSocketHandler(tornado.websocket.WebSocketHandler):
-
-    #chatrooms, each chatroom has a waiter(user) set
-    activities = {}
-
     def allow_draft76(self):
-        # for iOS 5.0 Safari
         return True
 
-    def open(self, userID, roomID):
-        logging.info("%s has connected to room:%s" %(userID, roomID))
+    def open(self, userID, activityId):
+        logging.info("%s has connected to activity:%s" %(userID, activityId))
         self.userID = userID
-        self.roomID = roomID
-        #add current user to its corresponding actitivy (chartroom) 
-        waiterSet = ChatSocketHandler.getWaiterSet(roomID)
-        waiterSet.add(self)
-
+        self.activityId = activityId
+        self.application.chat.add(self)
+        
     def on_close(self):
-        logging.info("%s has closed at room:%s" %(self.userID, self.roomID))
-        waiterSet = ChatSocketHandler.getWaiterSet(self.roomID)
-        waiterSet.remove(self)
+        logging.info("%s has closed at activity:%s" %(self.userID, self.activityId))
+        self.application.chat.remove(self)
 
     def on_message(self, message):
         logging.info("got message %r", message)
-        ChatSocketHandler.send_updates(message, self.roomID)
+        self.application.chat.send(self.activityId, message)
 
-    @classmethod
-    def getWaiterSet(cls, roomID):
-        waiterSet = cls.activities.get(roomID)
-        if not waiterSet:
-            cls.activities[roomID] = set()
-        return cls.activities[roomID]
+class Chat(object):
+    activities = {}
 
-    @classmethod
-    def send_updates(cls, message, roomID):
-        logging.info("sending message to %d waiters in Room:%s" % (len(cls.activities.get(roomID)), roomID))
-        waiterSet = cls.activities.get(roomID)
-        for waiter in waiterSet:
+    def add(self, client):
+        activityId = client.activityId
+        clientSet = self.activities.get(activityId)
+        if not clientSet:
+            clientSet = self.activities[activityId] = set()
+        else:
+            self.send(activityId, 'add one client!')
+        clientSet.add(client)
+        #test
+        logging.info(self.activities)
+
+    def remove(self, client):
+        activityId = client.activityId
+        clientSet = self.activities.get(activityId)
+        clientSet.remove(client)
+        if len(clientSet) == 0:
+            del self.activities[activityId]
+        else:
+            self.send(activityId, 'remove one client!')
+        #test
+        logging.info(self.activities)
+
+    def send(self, activityId, message):
+        logging.info("sending message:%s waiters in activity:%s" % (message, activityId))
+        clientSet = self.activities.get(activityId)
+        for client in clientSet:
             try:
-                waiter.write_message(message)
+                client.write_message(message)
             except:
                 logging.error("Error sending message", exc_info=True)
 
 def main():
-    db.create_db()
-    # tornado.options.parse_command_line()
-    # app = Application()
-    # app.listen(options.port)
-    # tornado.ioloop.IOLoop.instance().start()
+    # 创建数据库
+    # db.create_db()
+    tornado.options.parse_command_line()
+    app = Application()
+    app.listen(options.port)
+    tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
     main()
