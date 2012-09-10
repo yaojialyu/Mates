@@ -14,8 +14,8 @@ import tornado.websocket
 import os.path
 import settings
 from tornado.options import options
-
-from models import db, User
+from database import db
+from models import User
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -79,10 +79,11 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
                 logging.error("Error sending message", exc_info=True)
 
 def main():
-    tornado.options.parse_command_line()
-    app = Application()
-    app.listen(options.port)
-    tornado.ioloop.IOLoop.instance().start()
+    db.create_db()
+    # tornado.options.parse_command_line()
+    # app = Application()
+    # app.listen(options.port)
+    # tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
     main()

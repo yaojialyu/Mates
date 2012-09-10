@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # db.session.commit()
 
-    users = User.query.filter_by(username__contains="user").all()
+    users = User.query.filter_by(username__contains="yas", password="some").all()
     for user in users :
         print user.id, user.username, user.password
 
