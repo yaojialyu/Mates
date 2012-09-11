@@ -17,13 +17,13 @@ import settings
 from tornado.options import options
 from database import db
 from models import User
-
-
+from util import Chat
 
 class Application(tornado.web.Application):
     def __init__(self):
         self.chat = Chat()
         handlers = [
+            (r'/activities/(?P<api>[a-z]+)', ActivityAPIHandler),
             (r'/(?P<userID>\d+)/(?P<activityId>\d+)/', MainHandler),
             (r'/chat/(?P<userID>\d+)/(?P<activityId>\d+)/', ChatSocketHandler),
         ]
@@ -57,39 +57,24 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
         logging.info("got message %r", message)
         self.application.chat.send(self.activityId, message)
 
-class Chat(object):
-    activities = {}
+class ActivityAPIHandler(tornado.web.RequestHandler):
+    def post(self,api):
+        ###### show near by activities #####
+        if api == 'near':
+            pass
 
-    def add(self, client):
-        activityId = client.activityId
-        clientSet = self.activities.get(activityId)
-        if not clientSet:
-            clientSet = self.activities[activityId] = set()
-        else:
-            self.send(activityId, 'add one client!')
-        clientSet.add(client)
-        #test
-        logging.info(self.activities)
+        ###### show home activities #####
+        elif api == 'home':
+            pass
 
-    def remove(self, client):
-        activityId = client.activityId
-        clientSet = self.activities.get(activityId)
-        clientSet.remove(client)
-        if len(clientSet) == 0:
-            del self.activities[activityId]
-        else:
-            self.send(activityId, 'remove one client!')
-        #test
-        logging.info(self.activities)
+        ###### show my favourited activities #####
+        elif api == 'favourites':
+            pass
 
-    def send(self, activityId, message):
-        logging.info("sending message:%s waiters in activity:%s" % (message, activityId))
-        clientSet = self.activities.get(activityId)
-        for client in clientSet:
-            try:
-                client.write_message(message)
-            except:
-                logging.error("Error sending message", exc_info=True)
+        ###### show single activity info #####
+        elif api == 'show':
+            pass
+
 
 def main():
     # 创建数据库
