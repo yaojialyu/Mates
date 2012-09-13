@@ -16,6 +16,7 @@ from sqlalchemy.sql import operators, extract
 from tornado.ioloop import PeriodicCallback
 from tornado.options import options
 
+ 
 
 """
 DjangoQuery From
@@ -136,6 +137,7 @@ class Model(object):
     def __init__(self, **kwargs):
         for k, v in kwargs.iteritems():
             setattr(self, k, v)
+    
 
 class SQLAlchemy(object):
 
@@ -185,5 +187,4 @@ class SQLAlchemy(object):
 '''
 连接数据库
 '''
-db = SQLAlchemy("mysql://%s:%s@%s:%s/%s?charset=utf8" % (options.dbuser, options.dbpass,
-    options.dbhost, options.dbport, options.dbname), pool_recycle=3600, convert_unicode=True)
+db = SQLAlchemy("mysql://%s:%s@%s:%s/%s?charset=utf8" % (options.dbuser, options.dbpass,options.dbhost, options.dbport, options.dbname), pool_recycle=3600, convert_unicode=True)
