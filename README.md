@@ -10,6 +10,5 @@ Renxia Wang
 Yujie Wu  
 
 ##Version2 Authors
-Yujie Wu  
-Yaojia Lv  
+NOT FINISH YET!!!
 
